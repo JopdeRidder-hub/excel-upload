@@ -8,7 +8,7 @@ To use this code follow the steps below
 ## Installation and usage
 
 ```sh
-pip install -r requirements
+pip install -r requirements.txt
 
 python manage.py makemigrations
 
