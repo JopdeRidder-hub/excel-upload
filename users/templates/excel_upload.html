@@ -1,0 +1,45 @@
+{% load rest_framework %}
+
+<html>
+    <head>
+        <title>
+            Excel file upload and processing
+        </title>
+    </head>
+    <body style="margin-top: 30px;margin-left: 30px;">
+        <p style="font-weight: bold;">
+            Here you can upload an excel file with user data.
+            <br>
+            <br>
+            The excel file must meet the following fields and in the following order:
+            <br>
+            <br>
+            | email | first_name | last_name | team |
+        </p>
+        <form action="{% url "user-excel-upload" %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="file"
+                   title="Upload excel file"
+                   name="file"
+                   style="border: 1px solid black; padding: 5px;"
+                   required="required">
+            <p>
+            <input type="submit"
+                   value="Upload"
+                   style="border: 1px solid green; padding:5px; border-radius: 2px; cursor: pointer;">
+        </form>
+
+        <p></p>
+        <hr>
+
+        {% for user in excel_data %}
+            {% for field in user %}
+            {{ field }}&nbsp;&nbsp;
+            {% endfor %}
+            <br>
+        {% endfor %}
+        {% if error %}
+            {{error}}
+        {% endif %}
+    </body>
+</html>
